@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Khans Imperial SuperStore — Woking</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A84C;--gold-light:#F0D080;--gold-dim:rgba(201,168,76,0.15);
+  --dark:#0F0E0C;--dark2:#1A1815;--dark3:#252320;
+  --cream:#FAF6EE;--green:#1B4332;--green2:#2D6A4F;
+  --text:#1A1815;--muted:#6B6457;--red:#C0392B;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);overflow-x:hidden}
+
+/* ===== PAGE TABS ===== */
+.page-tabs{
+  background:#0a0908;
+  border-bottom:2px solid var(--gold);
+  display:flex;
+  position:sticky;top:0;z-index:300;
+}
+.page-tab{
+  flex:1;padding:15px 8px;
+  background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;
+  font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:400;
+  color:rgba(255,255,255,0.4);cursor:pointer;letter-spacing:0.5px;
+  transition:all 0.2s;text-align:center;white-space:nowrap;
+}
+.page-tab:hover{color:rgba(255,255,255,0.75);background:rgba(255,255,255,0.03)}
+.page-tab.active{color:var(--gold);border-bottom-color:var(--gold);font-weight:500;background:rgba(201,168,76,0.05)}
+
+/* ===== PAGES ===== */
+.page{display:none}
+.page.active{display:block}
+
+/* ===== NAV ===== */
+nav{
+  background:var(--dark2);
+  border-bottom:1px solid rgba(201,168,76,0.18);
+  padding:0 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:62px;
+}
+.nav-brand{display:flex;align-items:center;gap:12px;cursor:pointer;text-decoration:none;}
+.nav-crown{font-size:1.4rem;line-height:1;}
+.nav-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--gold);line-height:1.15;}
+.nav-name span{display:block;font-size:0.58rem;font-family:'DM Sans',sans-serif;color:rgba(201,168,76,0.45);font-weight:300;letter-spacing:2.5px;text-transform:uppercase;}
+.nav-links{display:flex;align-items:center;gap:1.5rem;}
+.nav-links button{background:none;border:none;font-family:'DM Sans',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.5);cursor:pointer;letter-spacing:0.3px;transition:color 0.2s;padding:0;}
+.nav-links button:hover{color:var(--gold)}
+.nav-call{background:var(--gold);color:var(--dark);padding:8px 18px;border-radius:4px;font-size:0.78rem;font-weight:500;text-decoration:none;letter-spacing:0.3px;transition:background 0.2s;white-space:nowrap;}
+.nav-call:hover{background:var(--gold-light)}
+
+/* ===== HERO ===== */
+.hero{
+  min-height: 88vh;
+  background: var(--dark);
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dark atmospheric background */
+.hero::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 80% at 65% 50%, rgba(27,67,50,0.28) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 10% 90%, rgba(201,168,76,0.06) 0%, transparent 60%),
+    linear-gradient(135deg, #0a0908 0%, #111009 50%, #0c110a 100%);
+  z-index:0;
+}
+
+/* Subtle texture lines */
+.hero::after{
+  content:'';
+  position:absolute;inset:0;
+  background-image: repeating-linear-gradient(
+    0deg, transparent, transparent 40px,
+    rgba(201,168,76,0.015) 40px, rgba(201,168,76,0.015) 41px
+  );
+  z-index:0;
+}
+
+.hero-left{
+  position:relative;z-index:2;
+  padding:5rem 3rem 8rem 4rem;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.28);
+  color:var(--gold);font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;
+  padding:7px 16px;border-radius:2px;margin-bottom:2rem;width:fit-content;
+}
+.hero-badge::before{content:'';width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0;}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,5vw,4.5rem);
+  font-weight:900;color:#fff;
+  line-height:1.04;margin-bottom:1.6rem;
+}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero-sub{
+  color:rgba(255,255,255,0.48);font-size:1rem;
+  line-height:1.75;max-width:420px;
+  margin-bottom:2.8rem;font-weight:300;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;}
+.btn-gold{
+  background:var(--gold);color:var(--dark);
+  padding:14px 28px;border-radius:4px;font-size:0.9rem;
+  font-weight:500;text-decoration:none;cursor:pointer;
+  border:none;font-family:'DM Sans',sans-serif;
+  letter-spacing:0.3px;transition:all 0.2s;display:inline-block;
+}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-ghost{
+  background:transparent;color:#fff;
+  border:1px solid rgba(255,255,255,0.22);
+  padding:14px 28px;border-radius:4px;font-size:0.9rem;
+  font-weight:400;text-decoration:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;transition:all 0.2s;display:inline-block;
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* Hero right panel — logo emblem */
+.hero-right{
+  position:relative;z-index:2;
+  background:rgba(27,67,50,0.18);
+  border-left:1px solid rgba(201,168,76,0.12);
+  display:flex;align-items:center;justify-content:center;
+  padding:3rem 2rem;
+}
+.emblem{
+  width:300px;height:300px;border-radius:50%;
+  background:rgba(15,14,12,0.6);
+  border:2px solid rgba(201,168,76,0.35);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  position:relative;text-align:center;padding:2rem;
+}
+.emblem::before{
+  content:'';position:absolute;inset:10px;
+  border:1px solid rgba(201,168,76,0.12);border-radius:50%;
+}
+.emblem-crown{font-size:2.8rem;display:block;margin-bottom:0.6rem;line-height:1;}
+.emblem-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;font-weight:900;
+  color:var(--gold);letter-spacing:2px;line-height:1.15;
+}
+.emblem-line{width:50px;height:1px;background:rgba(201,168,76,0.4);margin:10px auto;}
+.emblem-sub{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+.emblem-tagline{font-size:0.62rem;color:rgba(255,255,255,0.25);font-style:italic;margin-top:8px;letter-spacing:0.5px;}
+.halal-seal{
+  position:absolute;bottom:-18px;right:-10px;
+  width:70px;height:70px;border-radius:50%;
+  background:var(--green);border:2px solid var(--gold);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+}
+.halal-seal .hs-ar{font-size:1.1rem;color:var(--gold);font-weight:700;line-height:1;}
+.halal-seal .hs-en{font-size:0.45rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.55);}
+
+/* Stats bottom bar */
+.hero-stats{
+  position:absolute;bottom:0;left:0;
+  width:calc(100% - 420px);
+  background:rgba(10,9,8,0.88);
+  border-top:1px solid rgba(201,168,76,0.12);
+  padding:1.2rem 4rem;
+  display:flex;gap:3rem;align-items:center;z-index:2;
+}
+.hst{border-left:2px solid var(--gold);padding-left:1rem;}
+.hst-n{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:var(--gold);}
+.hst-l{font-size:0.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-top:2px;}
+
+/* ===== HALAL BAR ===== */
+.halal-bar{
+  background:var(--green);
+  padding:1rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.8rem;
+}
+.hb-msg{color:rgba(255,255,255,0.72);font-size:0.8rem;letter-spacing:0.3px;}
+.hb-tags{display:flex;gap:0.8rem;flex-wrap:wrap;}
+.hb-tag{
+  font-size:0.62rem;letter-spacing:1.8px;text-transform:uppercase;
+  color:var(--gold);background:rgba(201,168,76,0.1);
+  border:1px solid rgba(201,168,76,0.22);padding:5px 12px;border-radius:2px;
+}
+
+/* ===== SHARED SECTION STYLES ===== */
+.sec{padding:5rem 4rem;}
+.sec-cream{background:var(--cream);}
+.sec-dark{background:var(--dark);}
+.sec-white{background:#fff;}
+.sec-green{background:var(--green);}
+.lbl{font-size:0.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.8rem;}
+.ttl{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3vw,2.7rem);font-weight:700;line-height:1.15;margin-bottom:0.8rem;}
+.ttl-w{color:#fff;}
+.sub{color:var(--muted);font-size:0.9rem;line-height:1.7;max-width:460px;font-weight:300;}
+.sub-w{color:rgba(255,255,255,0.42);}
+
+/* ===== CATEGORIES ===== */
+.cats-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border:1px solid rgba(0,0,0,0.08);margin-top:3rem;
+}
+.cat-card{
+  background:#fff;padding:2.5rem 2rem;
+  border-right:1px solid rgba(0,0,0,0.08);
+  position:relative;overflow:hidden;transition:all 0.3s;
+}
+.cat-card:last-child{border-right:none;}
+.cat-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--gold);transform:scaleX(0);transition:transform 0.3s;
+}
+.cat-card:hover{background:var(--dark);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.2);}
+.cat-card:hover::after{transform:scaleX(1)}
+.cat-card:hover .ct,.cat-card:hover .cd{color:rgba(255,255,255,0.45)}
+.cat-card:hover .ct{color:#fff}
+.cat-card:hover .ck{color:var(--gold)}
+.ci{font-size:2.2rem;margin-bottom:1.3rem;}
+.ct{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;margin-bottom:0.5rem;transition:color 0.3s;}
+.cd{font-size:0.84rem;color:var(--muted);line-height:1.65;font-weight:300;transition:color 0.3s;}
+.ck{display:block;margin-top:1.2rem;font-size:0.62rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);font-weight:500;cursor:pointer;transition:color 0.3s;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0;}
+
+/* ===== ORDER SECTION ===== */
+.order-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem;align-items:start;}
+.call-card{background:var(--dark2);border:1px solid rgba(201,168,76,0.18);border-radius:6px;padding:2.2rem;}
+.call-num{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--gold);margin:0.8rem 0 0.4rem;}
+.call-hint{font-size:0.8rem;color:rgba(255,255,255,0.3);font-weight:300;line-height:1.5;}
+.call-btn{
+  display:inline-flex;align-items:center;gap:8px;margin-top:1.5rem;
+  background:var(--gold);color:var(--dark);padding:12px 24px;
+  border-radius:4px;text-decoration:none;font-size:0.86rem;font-weight:500;transition:all 0.2s;
+}
+.call-btn:hover{background:var(--gold-light)}
+.apps-lbl{font-size:0.62rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:1.2rem;}
+.apps-list{display:flex;flex-direction:column;gap:0.75rem;}
+.app-row{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--dark2);border:1px solid rgba(255,255,255,0.06);
+  border-radius:5px;padding:0.9rem 1.1rem;transition:border-color 0.2s;
+}
+.app-row:hover{border-color:rgba(201,168,76,0.3)}
+.app-info{display:flex;align-items:center;gap:10px;}
+.app-logo{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.58rem;flex-shrink:0;}
+.logo-ue{background:#06C167;color:#000;}
+.logo-del{background:#00CCBC;color:#fff;}
+.logo-je{background:#FF8000;color:#fff;}
+.app-nm{font-size:0.88rem;font-weight:500;color:#fff;}
+.app-ht{font-size:0.72rem;color:rgba(255,255,255,0.3);margin-top:1px;}
+.app-soon{font-size:0.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(201,168,76,0.5);background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);padding:4px 9px;border-radius:2px;}
+
+/* ===== VISIT ===== */
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:3rem;}
+.info-card{background:#fff;border-radius:6px;padding:2rem;border:1px solid rgba(0,0,0,0.07);}
+.dark-card{background:var(--dark);border-radius:6px;padding:2rem;color:#fff;}
+.card-ttl{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:1.4rem;display:flex;align-items:center;gap:8px;}
+.card-ttl::before{content:'';width:3px;height:18px;background:var(--gold);border-radius:2px;flex-shrink:0;}
+.dark-card .card-ttl{color:var(--gold);}
+.hr-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.05);}
+.dark-card .hr-row{border-bottom-color:rgba(255,255,255,0.06);}
+.hr-row:last-child{border-bottom:none;}
+.hr-d{font-size:0.84rem;color:var(--muted);}
+.dark-card .hr-d{color:rgba(255,255,255,0.4);}
+.hr-t{font-size:0.84rem;font-weight:500;display:flex;align-items:center;gap:6px;}
+.dot-g{width:5px;height:5px;background:#22C55E;border-radius:50%;flex-shrink:0;}
+.open-note{margin-top:1.2rem;padding:0.9rem;background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.15);border-radius:4px;font-size:0.78rem;color:#166534;line-height:1.5;}
+.aline{display:flex;align-items:flex-start;gap:10px;margin-bottom:1.1rem;}
+.aicon{font-size:0.95rem;flex-shrink:0;margin-top:2px;}
+.atxt{font-size:0.86rem;color:rgba(255,255,255,0.62);line-height:1.5;font-weight:300;}
+.atxt strong{color:#fff;font-weight:500;display:block;margin-bottom:2px;}
+.map-btn{
+  display:inline-flex;align-items:center;gap:6px;margin-top:0.5rem;
+  border:1px solid rgba(201,168,76,0.3);color:var(--gold);
+  padding:9px 18px;border-radius:4px;text-decoration:none;
+  font-size:0.78rem;font-weight:400;transition:all 0.2s;
+}
+.map-btn:hover{background:rgba(201,168,76,0.08)}
+
+/* ===== FOOTER ===== */
+footer{
+  background:var(--dark);border-top:1px solid rgba(201,168,76,0.1);
+  padding:1.8rem 4rem;display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.foot-brand{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--gold);}
+.foot-note{font-size:0.73rem;color:rgba(255,255,255,0.22);}
+
+/* ===== ABOUT PAGE ===== */
+.about-hero{
+  background:var(--dark);padding:6rem 4rem 5rem;
+  position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+}
+.about-hero::before{
+  content:'1984';
+  position:absolute;right:-1rem;top:50%;transform:translateY(-50%);
+  font-family:'Playfair Display',serif;font-size:13rem;font-weight:900;
+  color:rgba(201,168,76,0.04);pointer-events:none;line-height:1;
+}
+.about-hero p{color:rgba(255,255,255,0.5);font-size:0.92rem;line-height:1.75;font-weight:300;margin-bottom:1rem;}
+.about-img{
+  width:100%;height:360px;border-radius:6px;overflow:hidden;
+  background:var(--dark3);position:relative;
+}
+.about-img img{width:100%;height:100%;object-fit:cover;opacity:0.8;display:block;}
+.about-caption{background:var(--green);padding:1rem 1.4rem;border-radius:0 0 6px 6px;}
+.about-caption p{font-size:0.75rem;color:rgba(255,255,255,0.62);font-style:italic;font-weight:300;}
+
+.ab-stats{background:var(--green);padding:2.5rem 4rem;display:flex;justify-content:space-around;flex-wrap:wrap;gap:2rem;}
+.ab-s{text-align:center;}
+.ab-n{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:900;color:var(--gold);}
+.ab-l{font-size:0.62rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:4px;}
+
+.timeline{margin-top:3rem;position:relative;}
+.timeline::before{
+  content:'';position:absolute;left:30px;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--gold),rgba(201,168,76,0.05));
+}
+.tl-item{display:flex;gap:2rem;margin-bottom:2.8rem;}
+.tl-yr{
+  width:60px;height:60px;border-radius:50%;flex-shrink:0;
+  background:var(--dark);border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  font-family:'Playfair Display',serif;font-size:0.72rem;font-weight:700;color:var(--gold);line-height:1.2;
+}
+.tl-body{padding-top:0.9rem;}
+.tl-t{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:0.4rem;}
+.tl-p{font-size:0.85rem;color:var(--muted);line-height:1.65;font-weight:300;}
+
+.vals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.val-card{background:var(--dark2);border:1px solid rgba(201,168,76,0.1);border-radius:6px;padding:1.8rem;}
+.v-icon{font-size:1.5rem;margin-bottom:0.9rem;}
+.v-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:0.4rem;}
+.v-txt{font-size:0.82rem;color:rgba(255,255,255,0.38);line-height:1.65;font-weight:300;}
+
+/* ===== PRICES PAGE ===== */
+.prices-hero{background:var(--dark);padding:4rem 4rem 3rem;border-bottom:1px solid rgba(201,168,76,0.12);}
+.prices-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:#fff;margin-bottom:0.5rem;}
+.prices-hero h1 em{color:var(--gold);font-style:normal;}
+.prices-hero p{color:rgba(255,255,255,0.38);font-size:0.88rem;font-weight:300;}
+
+.prices-body{background:var(--cream);padding:4rem;}
+.price-cats{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;}
+.psec-hd{display:flex;align-items:center;gap:0.8rem;margin-bottom:1.1rem;padding-bottom:0.7rem;border-bottom:2px solid var(--gold);}
+.psec-icon{font-size:1.3rem;}
+.psec-title{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;}
+.price-list{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.5rem;}
+.pi{
+  background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:4px;
+  padding:0.72rem 0.9rem;display:flex;justify-content:space-between;align-items:center;
+  transition:all 0.2s;
+}
+.pi:hover{background:var(--dark);border-color:rgba(201,168,76,0.2);}
+.pi:hover .pi-n{color:#fff}
+.pi:hover .pi-p{color:var(--gold)}
+.pi-n{font-size:0.84rem;font-weight:400;transition:color 0.2s;}
+.pi-p{font-size:0.84rem;font-weight:500;color:var(--red);transition:color 0.2s;white-space:nowrap;margin-left:0.5rem;}
+.pi-note{font-size:0.75rem;color:var(--muted);margin-top:0.4rem;font-style:italic;padding-left:4px;}
+.order-cta{margin-top:1.5rem;padding:1.1rem 1.4rem;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:4px;}
+.order-cta p{font-size:0.8rem;color:var(--muted);line-height:1.5;}
+.order-cta a{color:var(--green);font-weight:500;}
+
+.produce-sec{background:#fff;padding:4rem;}
+.produce-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem;}
+.pro-card{border-radius:6px;overflow:hidden;position:relative;height:155px;cursor:default;}
+.pro-card img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;display:block;}
+.pro-card:hover img{transform:scale(1.06)}
+.pro-lbl{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(10,9,8,0.88),transparent);padding:1.1rem 0.8rem 0.6rem;font-size:0.75rem;font-weight:500;color:#fff;letter-spacing:0.3px;}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .page-tab{font-size:0.72rem;padding:13px 6px;}
+  nav{padding:0 1rem;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-left{padding:3.5rem 1.5rem 7rem;}
+  .hero-right{display:none;}
+  .hero-stats{width:100%;padding:1rem 1.5rem;gap:1.5rem;}
+  .hst-n{font-size:1.3rem;}
+  .halal-bar{padding:1rem 1.5rem;}
+  .sec{padding:3.5rem 1.5rem;}
+  .cats-grid{grid-template-columns:1fr;}
+  .cat-card{border-right:none;border-bottom:1px solid rgba(0,0,0,0.07);}
+  .cat-card:last-child{border-bottom:none;}
+  .order-grid,.visit-grid,.about-hero,.vals-grid,.price-cats{grid-template-columns:1fr;gap:1.5rem;}
+  .about-hero{padding:3.5rem 1.5rem;}
+  .about-hero::before{font-size:5rem;right:0;}
+  .prices-hero,.prices-body,.produce-sec{padding:2.5rem 1.5rem;}
+  .produce-grid{grid-template-columns:repeat(2,1fr);}
+  .ab-stats{padding:2rem 1.5rem;}
+  footer{padding:1.5rem;}
+  .hero-btns{flex-direction:column;align-items:flex-start;}
+  .btn-gold,.btn-ghost{width:100%;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== PAGE TABS ===== -->
+<div class="page-tabs">
+  <button class="page-tab active" id="tab-home"   onclick="showPage('home')">🏠 Home</button>
+  <button class="page-tab"        id="tab-about"  onclick="showPage('about')">📖 Our Story</button>
+  <button class="page-tab"        id="tab-prices" onclick="showPage('prices')">💷 Prices &amp; Produce</button>
+  <button class="page-tab"        id="tab-order"  onclick="showPage('home');setTimeout(()=>document.getElementById('order-sec').scrollIntoView({behavior:'smooth'}),80)">📦 Order Now</button>
+</div>
+
+<!-- ===================== HOME ===================== -->
+<div id="page-home" class="page active">
+
+  <nav>
+    <div class="nav-brand" onclick="showPage('home')">
+      <div class="nav-crown">👑</div>
+      <div class="nav-name">Khans Imperial<span>SuperStore · Woking</span></div>
+    </div>
+    <div class="nav-links">
+      <button onclick="showPage('about')">Our Story</button>
+      <button onclick="showPage('prices')">Prices</button>
+      <button onclick="document.getElementById('order-sec').scrollIntoView({behavior:'smooth'})">Order</button>
+    </div>
+    <a href="tel:01483725215" class="nav-call">📞 01483 725215</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-badge">100% Halal Only &nbsp;·&nbsp; Est. 1984 &nbsp;·&nbsp; Woking, Surrey</div>
+      <h1>Premium <em>Halal</em><br>Fresh Meat<br>&amp; Groceries</h1>
+      <p class="hero-sub">Hand-selected halal meat &amp; poultry, fresh fruit and vegetables — available in-store or delivered to your door. Serving Woking families since 1984.</p>
+      <div class="hero-btns">
+        <button class="btn-gold" onclick="showPage('prices')">Browse Products →</button>
+        <button class="btn-ghost" onclick="document.getElementById('order-sec').scrollIntoView({behavior:'smooth'})">Order via Delivery App</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="emblem">
+        <span class="emblem-crown">👑</span>
+        <div class="emblem-name">KHANS<br>IMPERIAL</div>
+        <div class="emblem-line"></div>
+        <span class="emblem-sub">SuperStore · Woking</span>
+        <div class="emblem-tagline">Quality You Deserve, Trust We Deliver</div>
+        <div class="halal-seal">
+          <span class="hs-ar">حلال</span>
+          <span class="hs-en">Halal</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hst"><div class="hst-n">1984</div><div class="hst-l">Est. Woking</div></div>
+      <div class="hst"><div class="hst-n">100%</div><div class="hst-l">Halal Only</div></div>
+      <div class="hst"><div class="hst-n">Daily</div><div class="hst-l">Fresh Stock</div></div>
+      <div class="hst"><div class="hst-n">7</div><div class="hst-l">Days a Week</div></div>
+    </div>
+  </div>
+
+  <!-- HALAL BAR -->
+  <div class="halal-bar">
+    <div class="hb-msg">🟢 100% Halal — Every cut, every product. No exceptions, ever.</div>
+    <div class="hb-tags">
+      <span class="hb-tag">Halal Only</span>
+      <span class="hb-tag">Fresh Cut Daily</span>
+      <span class="hb-tag">Family Run Since 1984</span>
+      <span class="hb-tag">Open 7 Days</span>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="sec sec-cream">
+    <div class="lbl">What We Offer</div>
+    <div class="ttl">The Imperial Market Floor</div>
+    <p class="sub">Everything sourced with intention. Every cut prepared with care. Only the best makes it to your basket.</p>
+    <div class="cats-grid">
+      <div class="cat-card">
+        <div class="ci">🥩</div>
+        <div class="ct">Halal Meat</div>
+        <p class="cd">Lamb, sheep, beef and more — cut fresh daily by our butchers. Leg, chops, shanks, ribs, whole cuts and mince all available.</p>
+        <button class="ck" onclick="showPage('prices')">View Prices →</button>
+      </div>
+      <div class="cat-card">
+        <div class="ci">🍗</div>
+        <div class="ct">Poultry</div>
+        <p class="cd">Whole chickens, breast, thighs, drum sticks, baby chicken, piri piri chicken — fresh halal poultry cut to your preference.</p>
+        <button class="ck" onclick="showPage('prices')">View Prices →</button>
+      </div>
+      <div class="cat-card">
+        <div class="ci">🥦</div>
+        <div class="ct">Fresh Produce</div>
+        <p class="cd">Hand-picked fruit and vegetables arriving every single morning. Seasonal, vibrant and honestly priced for your family.</p>
+        <button class="ck" onclick="showPage('prices')">See Produce →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDER -->
+  <div class="sec sec-dark" id="order-sec">
+    <div class="lbl">How to Order</div>
+    <div class="ttl ttl-w">Get It Your Way</div>
+    <p class="sub sub-w">Call us direct for a personal order and custom cuts — or choose your favourite delivery app. We'll have it ready.</p>
+    <div class="order-grid">
+      <div class="call-card">
+        <div class="lbl">Call the Store Direct</div>
+        <div class="call-num">01483 725215</div>
+        <p class="call-hint">Custom cuts, bulk orders, family packs — just call and we'll have it freshly prepared for you.</p>
+        <a href="tel:01483725215" class="call-btn">📞 Call Now</a>
+      </div>
+      <div>
+        <div class="apps-lbl">Order via Delivery App</div>
+        <div class="apps-list">
+          <div class="app-row">
+            <div class="app-info">
+              <div class="app-logo logo-ue">UE</div>
+              <div><div class="app-nm">Uber Eats</div><div class="app-ht">Fast local delivery</div></div>
+            </div>
+            <span class="app-soon">Coming Soon</span>
+          </div>
+          <div class="app-row">
+            <div class="app-info">
+              <div class="app-logo logo-del">DEL</div>
+              <div><div class="app-nm">Deliveroo</div><div class="app-ht">Same day delivery</div></div>
+            </div>
+            <span class="app-soon">Coming Soon</span>
+          </div>
+          <div class="app-row">
+            <div class="app-info">
+              <div class="app-logo logo-je">JE</div>
+              <div><div class="app-nm">Just Eat</div><div class="app-ht">Order online</div></div>
+            </div>
+            <span class="app-soon">Coming Soon</span>
+          </div>
+        </div>
+        <p style="margin-top:1rem;font-size:0.72rem;color:rgba(255,255,255,0.18);font-weight:300;">Delivery links will go live once your store is registered on each platform.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISIT -->
+  <div class="sec sec-cream">
+    <div class="lbl">Find Us</div>
+    <div class="ttl">Visit the SuperStore</div>
+    <p class="sub">Open 7 days a week — come in, meet the team, and pick your cuts in person.</p>
+    <div class="visit-grid">
+      <div class="info-card">
+        <div class="card-ttl">Opening Hours</div>
+        <div class="hr-row"><span class="hr-d">Monday – Saturday</span><span class="hr-t"><span class="dot-g"></span>8:30am – 8:30pm</span></div>
+        <div class="hr-row"><span class="hr-d">Sunday</span><span class="hr-t"><span class="dot-g"></span>9:00am – 8:30pm</span></div>
+        <div class="open-note">Open every day of the year — because your family never stops needing fresh food. 🫡</div>
+      </div>
+      <div class="dark-card">
+        <div class="card-ttl">Our Location</div>
+        <div class="aline"><span class="aicon">📍</span><div class="atxt"><strong>93 Courtenay Road</strong>Woking, GU21 5HG, Surrey, England</div></div>
+        <div class="aline"><span class="aicon">📞</span><div class="atxt"><strong>01483 725215</strong>Call for orders &amp; enquiries</div></div>
+        <a href="https://www.google.com/maps/search/93+Courtenay+Road+Woking+GU21+5HG" target="_blank" class="map-btn">🗺 Get Directions on Google Maps</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="foot-brand">👑 Khans Imperial SuperStore</div>
+    <div class="foot-note">93 Courtenay Road, Woking GU21 5HG &nbsp;·&nbsp; 01483 725215 &nbsp;·&nbsp; 100% Halal &nbsp;·&nbsp; Open 7 Days &nbsp;·&nbsp; Est. 1984</div>
+  </footer>
+</div>
+
+<!-- ===================== ABOUT ===================== -->
+<div id="page-about" class="page">
+
+  <nav>
+    <div class="nav-brand" onclick="showPage('home')">
+      <div class="nav-crown">👑</div>
+      <div class="nav-name">Khans Imperial<span>SuperStore · Woking</span></div>
+    </div>
+    <div class="nav-links">
+      <button onclick="showPage('home')">Home</button>
+      <button onclick="showPage('prices')">Prices</button>
+    </div>
+    <a href="tel:01483725215" class="nav-call">📞 01483 725215</a>
+  </nav>
+
+  <div class="about-hero">
+    <div>
+      <div class="lbl">Our Story</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1.5rem;">Four Decades of<br><em style="color:var(--gold);font-style:italic;">Trust &amp; Tradition.</em></h1>
+      <p>What started in 1984 as a small family-run halal butcher in Woking has grown into something the whole community calls their own. Khans Imperial SuperStore has served generation after generation — and we still know most of our customers by name.</p>
+      <p>Every cut of meat is prepared in-house by butchers who have spent decades at the block. Our fruit and vegetables arrive fresh every morning — never sitting on a shelf longer than they need to.</p>
+      <p>We believe a great grocer should feel like a neighbour. Somewhere you can ask questions, trust what you're buying, and take home something your family will love.</p>
+    </div>
+    <div>
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1606756790138-261d2b21cd75?w=700&q=80" alt="Butcher preparing fresh halal meat"/>
+      </div>
+      <div class="about-caption"><p>"Quality You Deserve, Trust We Deliver — since 1984."</p></div>
+    </div>
+  </div>
+
+  <div class="ab-stats">
+    <div class="ab-s"><div class="ab-n">1984</div><div class="ab-l">Year Founded</div></div>
+    <div class="ab-s"><div class="ab-n">40+</div><div class="ab-l">Years Serving Woking</div></div>
+    <div class="ab-s"><div class="ab-n">100%</div><div class="ab-l">Halal Only</div></div>
+    <div class="ab-s"><div class="ab-n">Daily</div><div class="ab-l">Fresh Produce</div></div>
+  </div>
+
+  <div class="sec sec-cream">
+    <div class="lbl">Our Journey</div>
+    <div class="ttl">From a Single Stall to an Imperial Store</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-yr">1984</div>
+        <div class="tl-body">
+          <div class="tl-t">The Beginning</div>
+          <p class="tl-p">Khans opens its doors as a small halal butcher in Woking, serving the local community with fresh, affordable, trusted cuts. From day one the commitment was simple: quality you can count on.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-yr">1990s</div>
+        <div class="tl-body">
+          <div class="tl-t">Growing the Community</div>
+          <p class="tl-p">Word spread quickly. Khans became the go-to halal butcher for families across Woking and surrounding areas — fresh lamb, chicken and beef prepared in-house every single morning.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-yr">2000s</div>
+        <div class="tl-body">
+          <div class="tl-t">Expanding the Range</div>
+          <p class="tl-p">Fresh fruit and vegetables were added to the range, making Khans a true one-stop shop for the whole family. The SuperStore name was earned through years of consistent quality.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-yr">Today</div>
+        <div class="tl-body">
+          <div class="tl-t">Khans Imperial SuperStore</div>
+          <p class="tl-p">Four decades on, we're still family-run, still cutting fresh every morning, and still serving Woking the way we always have. Now taking orders online too — same care, even faster.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sec-dark">
+    <div class="lbl">What We Stand For</div>
+    <div class="ttl ttl-w">Our Values</div>
+    <div class="vals-grid">
+      <div class="val-card">
+        <div class="v-icon">🕌</div>
+        <div class="v-title">Halal. Always.</div>
+        <p class="v-txt">Every product we sell is halal. No mixed stock, no exceptions. We exist to serve our community with complete integrity.</p>
+      </div>
+      <div class="val-card">
+        <div class="v-icon">🌅</div>
+        <div class="v-title">Fresh Every Morning</div>
+        <p class="v-txt">Our butchers are in before sunrise. What you buy today was prepared today. That's not a slogan — it's how we've worked for 40 years.</p>
+      </div>
+      <div class="val-card">
+        <div class="v-icon">🤝</div>
+        <div class="v-title">Family &amp; Community</div>
+        <p class="v-txt">We've served Woking families for 40 years. We know your name, your preferences, the cuts your family loves. That personal touch means everything to us.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sec-cream">
+    <div class="lbl">Come See Us</div>
+    <div class="ttl">Visit the SuperStore</div>
+    <div class="visit-grid">
+      <div class="info-card">
+        <div class="card-ttl">Opening Hours</div>
+        <div class="hr-row"><span class="hr-d">Monday – Saturday</span><span class="hr-t"><span class="dot-g"></span>8:30am – 8:30pm</span></div>
+        <div class="hr-row"><span class="hr-d">Sunday</span><span class="hr-t"><span class="dot-g"></span>9:00am – 8:30pm</span></div>
+      </div>
+      <div class="dark-card">
+        <div class="card-ttl">Our Location</div>
+        <div class="aline"><span class="aicon">📍</span><div class="atxt"><strong>93 Courtenay Road</strong>Woking, GU21 5HG</div></div>
+        <div class="aline"><span class="aicon">📞</span><div class="atxt"><strong>01483 725215</strong></div></div>
+        <a href="https://www.google.com/maps/search/93+Courtenay+Road+Woking+GU21+5HG" target="_blank" class="map-btn">🗺 Get Directions</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="foot-brand">👑 Khans Imperial SuperStore</div>
+    <div class="foot-note">93 Courtenay Road, Woking GU21 5HG &nbsp;·&nbsp; 01483 725215 &nbsp;·&nbsp; Family Run Since 1984</div>
+  </footer>
+</div>
+
+<!-- ===================== PRICES ===================== -->
+<div id="page-prices" class="page">
+
+  <nav>
+    <div class="nav-brand" onclick="showPage('home')">
+      <div class="nav-crown">👑</div>
+      <div class="nav-name">Khans Imperial<span>SuperStore · Woking</span></div>
+    </div>
+    <div class="nav-links">
+      <button onclick="showPage('home')">Home</button>
+      <button onclick="showPage('about')">Our Story</button>
+    </div>
+    <a href="tel:01483725215" class="nav-call">📞 01483 725215</a>
+  </nav>
+
+  <div class="prices-hero">
+    <div class="lbl">Our Pricing</div>
+    <h1>Fresh Cuts &amp; <em>Produce</em></h1>
+    <p>All prices per kg unless stated. All meat 100% halal, freshly prepared daily. Prices may vary — call us to confirm.</p>
+  </div>
+
+  <div class="prices-body">
+    <div class="price-cats">
+
+      <!-- LAMB -->
+      <div>
+        <div class="psec-hd"><span class="psec-icon">🐑</span><span class="psec-title">Lamb</span></div>
+        <div class="price-list">
+          <div class="pi"><span class="pi-n">Leg Shoulder</span><span class="pi-p">£15.50/kg</span></div>
+          <div class="pi"><span class="pi-n">Front Chops</span><span class="pi-p">£14.50/kg</span></div>
+          <div class="pi"><span class="pi-n">Back Chops</span><span class="pi-p">£14.50/kg</span></div>
+          <div class="pi"><span class="pi-n">Lamb NK</span><span class="pi-p">£11.00/kg</span></div>
+          <div class="pi"><span class="pi-n">Lamb Ribs</span><span class="pi-p">£11.00/kg</span></div>
+          <div class="pi"><span class="pi-n">Lamb Shanks</span><span class="pi-p">£18.50/kg</span></div>
+          <div class="pi"><span class="pi-n">Whole Lamb</span><span class="pi-p">£11.99/kg</span></div>
+          <div class="pi"><span class="pi-n">1/5 Lamb</span><span class="pi-p">£12.50/kg</span></div>
+          <div class="pi"><span class="pi-n">Lamb Feet</span><span class="pi-p">£1.20 each</span></div>
+          <div class="pi"><span class="pi-n">Lamb Liver</span><span class="pi-p">£3.50/kg</span></div>
+        </div>
+
+        <div class="psec-hd"><span class="psec-icon">🐟</span><span class="psec-title">Fish</span></div>
+        <div class="price-list">
+          <div class="pi"><span class="pi-n">Fish Muscle</span><span class="pi-p">£3.50 each</span></div>
+          <div class="pi"><span class="pi-n">Rohi Fish</span><span class="pi-p">£11.99/kg</span></div>
+          <div class="pi"><span class="pi-n">White Fish</span><span class="pi-p">£5.99/kg</span></div>
+        </div>
+
+        <div class="psec-hd"><span class="psec-icon">🫙</span><span class="psec-title">Mince / Keema</span></div>
+        <div class="price-list">
+          <div class="pi"><span class="pi-n">Normal Keema</span><span class="pi-p">£9.50/kg</span></div>
+          <div class="pi"><span class="pi-n">Lamb Special</span><span class="pi-p">£21.99/kg</span></div>
+          <div class="pi"><span class="pi-n">Mutton Special</span><span class="pi-p">£15.99/kg</span></div>
+          <div class="pi"><span class="pi-n">Beef Keema</span><span class="pi-p">£11.99/kg</span></div>
+          <div class="pi"><span class="pi-n">Chicken Breast Keema</span><span class="pi-p">£6.99/kg</span></div>
+          <div class="pi"><span class="pi-n">Chicken Breast Special</span><span class="pi-p">£27.80/kg</span></div>
+        </div>
+        <p class="pi-note">* £1 extra charge for Hand Made Keema</p>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <div class="psec-hd"><span class="psec-icon">🐏</span><span class="psec-title">Sheep</span></div>
+        <div class="price-list">
+          <div class="pi"><span class="pi-n">Leg + Shoulder</span><span class="pi-p">£11.50/kg</span></div>
+          <div class="pi"><span class="pi-n">Sheep Boneless</span><span class="pi-p">£16.99/kg</span></div>
+          <div class="pi"><span class="pi-n">Back Chops</span><span class="pi-p">£10.50/kg</span></div>
+          <div class="pi"><span class="pi-n">Sheep Neck</span><span class="pi-p">£8.99/kg</span></div>
+          <div class="pi"><span class="pi-n">Sheep Ribs</span><span class="pi-p">£8.99/kg</span></div>
+          <div class="pi"><span class="pi-n">Whole Sheep</span><span class="pi-p">£8.59/kg</span></div>
+          <div class="pi"><span class="pi-n">1/2 Sheep</span><span class="pi-p">£8.99/kg</span></div>
+        </div>
+
+        <div class="psec-hd"><span class="psec-icon">🍗</span><span class="psec-title">Chicken</span></div>
+        <div class="price-list">
+          <div class="pi"><span class="pi-n">Boneless Breast</span><span class="pi-p">£7.50/kg</span></div>
+          <div class="pi"><span class="pi-n">Thighs</span><span class="pi-p">£6.99/kg</span></div>
+          <div class="pi"><span class="pi-n">Niblets</span><span class="pi-p">£5.00/kg</span></div>
+          <div class="pi"><span class="pi-n">Drum Sticks</span><span class="pi-p">£4.50/kg</span></div>
+          <div class="pi"><span class="pi-n">Chicken Wing</span><span class="pi-p">£4.80/kg</span></div>
+          <div class="pi"><span class="pi-n">Medium / Large Chicken</span><span class="pi-p">£11.50/kg</span></div>
+          <div class="pi"><span class="pi-n">Baby Chicken</span><span class="pi-p">£4.50 each</span></div>
+          <div class="pi"><span class="pi-n">Hard Boiler Chicken</span><span class="pi-p">£5.50 each</span></div>
+          <div class="pi"><span class="pi-n">Piri Piri Chicken</span><span class="pi-p">£8.50 each</span></div>
+        </div>
+
+        <div class="psec-hd"><span class="psec-icon">🥩</span><span class="psec-title">Beef</span></div>
+        <div class="price-list">
+          <div class="pi"><span class="pi-n">Beef Boneless</span><span class="pi-p">£11.99/kg</span></div>
+          <div class="pi"><span class="pi-n">Beef with Bones</span><span class="pi-p">£8.50/kg</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="order-cta">
+      <p>📞 <strong>Want a custom cut or bulk order?</strong> Call us on <a href="tel:01483725215">01483 725215</a> and we'll prepare it fresh for you. We cater for all family sizes.</p>
+    </div>
+  </div>
+
+  <!-- PRODUCE -->
+  <div class="produce-sec">
+    <div class="lbl">Fresh From the Farm</div>
+    <div class="ttl">Fruit &amp; Vegetables</div>
+    <p class="sub">Hand-picked and stocked every morning. A vibrant, seasonal selection for your whole family.</p>
+    <div class="produce-grid">
+      <div class="pro-card"><img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=80" alt="Fresh vegetables"/><div class="pro-lbl">Fresh Vegetables</div></div>
+      <div class="pro-card"><img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=400&q=80" alt="Seasonal fruit"/><div class="pro-lbl">Seasonal Fruit</div></div>
+      <div class="pro-card"><img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400&q=80" alt="Root vegetables"/><div class="pro-lbl">Root Vegetables</div></div>
+      <div class="pro-card"><img src="https://images.unsplash.com/photo-1582515073490-39981397c445?w=400&q=80" alt="Herbs and greens"/><div class="pro-lbl">Herbs &amp; Greens</div></div>
+      <div class="pro-card"><img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&q=80" alt="Onions and garlic"/><div class="pro-lbl">Onions &amp; Garlic</div></div>
+      <div class="pro-card"><img src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=400&q=80" alt="Apples and pears"/><div class="pro-lbl">Apples &amp; Pears</div></div>
+      <div class="pro-card"><img src="https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&q=80" alt="Citrus and tropicals"/><div class="pro-lbl">Citrus &amp; Tropicals</div></div>
+      <div class="pro-card"><img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&q=80" alt="Chillies and peppers"/><div class="pro-lbl">Chillies &amp; Peppers</div></div>
+    </div>
+    <p style="margin-top:1.3rem;font-size:0.8rem;color:var(--muted);text-align:center;">Stock varies seasonally — call to check availability: <a href="tel:01483725215" style="color:var(--green);font-weight:500;">01483 725215</a></p>
+  </div>
+
+  <footer>
+    <div class="foot-brand">👑 Khans Imperial SuperStore</div>
+    <div class="foot-note">93 Courtenay Road, Woking GU21 5HG &nbsp;·&nbsp; 01483 725215 &nbsp;·&nbsp; 100% Halal &nbsp;·&nbsp; Open 7 Days &nbsp;·&nbsp; Est. 1984</div>
+  </footer>
+</div>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  var tab = document.getElementById('tab-' + name);
+  if (tab) tab.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
