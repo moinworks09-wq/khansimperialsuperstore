@@ -69,7 +69,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 /* ============ NAV ============ */
 nav{
   background:#fff;
-  position:sticky;top:0;z-index:500;
   border-bottom:1px solid #e5e2dc;
   box-shadow:0 1px 8px rgba(0,0,0,0.06);
 }
@@ -692,9 +691,27 @@ nav{
   .delivery-pad{padding:2rem 1.2rem !important;}
 }
 </style>
+<style>
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+#ticker-track:hover { animation-play-state: paused; }
+</style>
 </head>
 <body>
 
+<!-- STICKY HEADER WRAPPER -->
+<div style="position:sticky;top:0;z-index:600;">
+  <!-- DELIVERY TICKER -->
+  <div style="background:var(--gold);overflow:hidden;padding:8px 0;">
+    <div id="ticker-track" style="display:flex;width:max-content;animation:ticker 20s linear infinite;white-space:nowrap;">
+      <span style="padding:0 3rem;font-size:0.78rem;font-weight:700;color:var(--dark);letter-spacing:1.5px;text-transform:uppercase;">🚗 We Do Delivery! &nbsp;·&nbsp; Please Enquire &nbsp;·&nbsp; Call Us: 01483 725215</span>
+      <span style="padding:0 3rem;font-size:0.78rem;font-weight:700;color:var(--dark);letter-spacing:1.5px;text-transform:uppercase;">🚗 We Do Delivery! &nbsp;·&nbsp; Please Enquire &nbsp;·&nbsp; Call Us: 01483 725215</span>
+      <span style="padding:0 3rem;font-size:0.78rem;font-weight:700;color:var(--dark);letter-spacing:1.5px;text-transform:uppercase;">🚗 We Do Delivery! &nbsp;·&nbsp; Please Enquire &nbsp;·&nbsp; Call Us: 01483 725215</span>
+      <span style="padding:0 3rem;font-size:0.78rem;font-weight:700;color:var(--dark);letter-spacing:1.5px;text-transform:uppercase;">🚗 We Do Delivery! &nbsp;·&nbsp; Please Enquire &nbsp;·&nbsp; Call Us: 01483 725215</span>
+    </div>
+  </div>
 <div class="top-bar">
   <div class="top-bar-left">
     <div class="top-bar-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>93 Courtenay Road, Woking GU21 5HG</div>
@@ -755,6 +772,8 @@ nav{
   <button class="mob-item" onclick="closeMobileNav();showPage('help')">❓ Help</button>
   <a href="tel:01483725215" class="mob-cta" style="background:var(--gold);color:var(--dark);margin-top:1rem;padding:14px;border-radius:6px;text-align:center;text-decoration:none;font-weight:600;display:block;">📞 01483 725215</a>
 </div>
+</div><!-- end sticky wrapper -->
+
 
 <div id="page-home" class="page active">
 
@@ -2203,10 +2222,29 @@ document.addEventListener('keydown', function(e){
 </body>
 </html>
 
+<script>
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  var el=document.getElementById('nav-'+name);
+  if(el)el.classList.add('active');
+  closeMobileNav();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMobileNav(){
+  document.getElementById('mobile-nav').classList.toggle('open');
+}
+function closeMobileNav(){
+  document.getElementById('mobile-nav').classList.remove('open');
+  document.body.style.overflow='';
+}
+</script>
+</body>
+</html>
+
 <!-- ===================== HELP ===================== -->
 <div id="page-help" class="page">
-
-  <!-- HERO -->
   <div style="position:relative;height:180px;overflow:hidden;background:#1A1815;">
     <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,67,50,0.9) 0%,rgba(10,9,8,0.85) 100%);z-index:1;"></div>
     <div style="position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;">
@@ -2214,181 +2252,74 @@ document.addEventListener('keydown', function(e){
       <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;line-height:1.1;">Help &amp; <em style="color:var(--gold);font-style:normal;">Support</em></h1>
     </div>
   </div>
-
-  <!-- CONTENT -->
   <div style="background:#F7F7F5;padding:4rem 2rem;">
     <div style="max-width:800px;margin:0 auto;">
-
-      <!-- Intro -->
       <div style="background:#fff;border-radius:12px;padding:2rem;margin-bottom:2rem;border:1px solid #e5e2dc;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
         <h2 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:#1A1815;margin-bottom:0.8rem;">Our Refunds &amp; Returns Policy</h2>
         <p style="font-size:0.9rem;color:#6B6457;line-height:1.7;">Thanks for shopping with us! We want you to be happy with your purchase. If something isn't quite right, here's what you need to know.</p>
       </div>
-
-      <!-- Section 1: Fresh produce -->
       <div style="background:#fff;border-radius:12px;padding:2rem;margin-bottom:1.5rem;border:1px solid #e5e2dc;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-left:4px solid var(--green);">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-          <span style="font-size:1.4rem;">🥩</span>
-          <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1A1815;">Fresh Fruit, Veg &amp; Halal Meat</h3>
-        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;"><span style="font-size:1.4rem;">🥩</span><h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1A1815;">Fresh Fruit, Veg &amp; Halal Meat</h3></div>
         <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
-          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--green);">•</span>
-            Because these are fresh and perishable, we can't usually accept returns on fruit, vegetables, or meat.
-          </li>
-          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--green);">•</span>
-            However, if you receive something that's spoiled or damaged, please get in touch within <strong>24 hours</strong>.
-          </li>
-          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--green);">•</span>
-            We'll do our best to sort it out with a replacement or refund, but a valid purchase receipt will be needed.
-          </li>
-          <li style="font-size:0.88rem;color:#C0392B;line-height:1.65;padding-left:1.2rem;position:relative;font-weight:500;">
-            <span style="position:absolute;left:0;">⚠</span>
-            Without a receipt, we are unable to process refunds or exchanges for these items.
-          </li>
+          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:var(--green);">•</span>Because these are fresh and perishable, we can't usually accept returns on fruit, vegetables, or meat.</li>
+          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:var(--green);">•</span>If you receive something spoiled or damaged, please get in touch within <strong>24 hours</strong>.</li>
+          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:var(--green);">•</span>We'll do our best to sort it out — a valid purchase receipt will be needed.</li>
+          <li style="font-size:0.88rem;color:#C0392B;line-height:1.65;padding-left:1.2rem;position:relative;font-weight:500;"><span style="position:absolute;left:0;">⚠</span>Without a receipt, we are unable to process refunds or exchanges.</li>
         </ul>
       </div>
-
-      <!-- Section 2: Other products -->
       <div style="background:#fff;border-radius:12px;padding:2rem;margin-bottom:1.5rem;border:1px solid #e5e2dc;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-left:4px solid var(--gold);">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-          <span style="font-size:1.4rem;">🛒</span>
-          <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1A1815;">Other Products (Spices, Chocolates, Drinks, etc.)</h3>
-        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;"><span style="font-size:1.4rem;">🛒</span><h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1A1815;">Other Products (Spices, Chocolates, Drinks, etc.)</h3></div>
         <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
-          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--gold);">•</span>
-            You can return <strong>unopened items</strong> within <strong>14 days</strong> of receiving them, in their original packaging.
-          </li>
-          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--gold);">•</span>
-            Once we receive the items back in good condition and a valid receipt is provided, we'll process your refund.
-          </li>
-          <li style="font-size:0.88rem;color:#C0392B;line-height:1.65;padding-left:1.2rem;position:relative;font-weight:500;">
-            <span style="position:absolute;left:0;">⚠</span>
-            No receipt presented means we won't be able to offer a refund or exchange.
-          </li>
+          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">•</span>You can return <strong>unopened items</strong> within <strong>14 days</strong>, in their original packaging.</li>
+          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">•</span>Once we receive items back in good condition with a valid receipt, we'll process your refund.</li>
+          <li style="font-size:0.88rem;color:#C0392B;line-height:1.65;padding-left:1.2rem;position:relative;font-weight:500;"><span style="position:absolute;left:0;">⚠</span>No receipt means we won't be able to offer a refund or exchange.</li>
         </ul>
       </div>
-
-      <!-- Section 3: Damaged / Faulty -->
       <div style="background:#fff;border-radius:12px;padding:2rem;margin-bottom:1.5rem;border:1px solid #e5e2dc;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-left:4px solid #C0392B;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-          <span style="font-size:1.4rem;">⚠️</span>
-          <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1A1815;">Damaged or Faulty Items</h3>
-        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;"><span style="font-size:1.4rem;">⚠️</span><h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1A1815;">Damaged or Faulty Items</h3></div>
         <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
-          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:#C0392B;">•</span>
-            Please contact us within <strong>14 days</strong> of receipt — ideally as soon as possible — and send photos of the issue.
-          </li>
-          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:#C0392B;">•</span>
-            We'll arrange a replacement or refund, but a valid receipt is needed to prove the transaction.
-          </li>
-          <li style="font-size:0.88rem;color:#C0392B;line-height:1.65;padding-left:1.2rem;position:relative;font-weight:500;">
-            <span style="position:absolute;left:0;">⚠</span>
-            Without a receipt, we may be unable to process a refund or return.
-          </li>
+          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:#C0392B;">•</span>Contact us within <strong>14 days</strong> of receipt and send photos if you can.</li>
+          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:#C0392B;">•</span>We'll arrange a replacement or refund with a valid receipt.</li>
+          <li style="font-size:0.88rem;color:#C0392B;line-height:1.65;padding-left:1.2rem;position:relative;font-weight:500;"><span style="position:absolute;left:0;">⚠</span>Without a receipt, we may be unable to process a refund or return.</li>
         </ul>
       </div>
-
-      <!-- Section 4: Getting refund -->
       <div style="background:#fff;border-radius:12px;padding:2rem;margin-bottom:1.5rem;border:1px solid #e5e2dc;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-left:4px solid var(--green);">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-          <span style="font-size:1.4rem;">💳</span>
-          <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1A1815;">Getting Your Refund</h3>
-        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;"><span style="font-size:1.4rem;">💳</span><h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1A1815;">Getting Your Refund</h3></div>
         <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
-          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--green);">•</span>
-            Once we've received and checked your return, we'll process your refund via the <strong>same payment method</strong> you used.
-          </li>
-          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--green);">•</span>
-            Please allow <strong>5–7 working days</strong> for the money to come through.
-          </li>
+          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:var(--green);">•</span>We'll refund via the <strong>same payment method</strong> you used.</li>
+          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:var(--green);">•</span>Please allow <strong>5–7 working days</strong> for the money to come through.</li>
         </ul>
       </div>
-
-      <!-- Section 5: How to return -->
       <div style="background:#fff;border-radius:12px;padding:2rem;margin-bottom:1.5rem;border:1px solid #e5e2dc;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-left:4px solid var(--gold);">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-          <span style="font-size:1.4rem;">📦</span>
-          <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1A1815;">How to Return Items</h3>
-        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;"><span style="font-size:1.4rem;">📦</span><h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1A1815;">How to Return Items</h3></div>
         <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
-          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--gold);">•</span>
-            Give us a call or visit us in person at the store — we're happy to help.
-          </li>
-          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--gold);">•</span>
-            For non-perishable items, bring them back to the store within 14 days.
-          </li>
-          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--gold);">•</span>
-            For fresh produce or meat, please <strong>contact us immediately</strong> so we can advise the best way to handle it.
-          </li>
+          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">•</span>Call us or visit us in person — we're happy to help.</li>
+          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">•</span>Non-perishable items: bring back to store within 14 days.</li>
+          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">•</span>Fresh produce or meat: <strong>contact us immediately</strong> so we can advise.</li>
         </ul>
       </div>
-
-      <!-- Section 6: Exchanges -->
       <div style="background:#fff;border-radius:12px;padding:2rem;margin-bottom:1.5rem;border:1px solid #e5e2dc;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-left:4px solid var(--green);">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-          <span style="font-size:1.4rem;">🔄</span>
-          <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1A1815;">Exchanging Items In Store</h3>
-        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;"><span style="font-size:1.4rem;">🔄</span><h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1A1815;">Exchanging Items In Store</h3></div>
         <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
-          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--green);">•</span>
-            Bring the item back within <strong>24–48 hours</strong> of purchase, unopened and in original packaging (non-perishables).
-          </li>
-          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--green);">•</span>
-            We'll happily swap it for something else or offer store credit if needed.
-          </li>
-          <li style="font-size:0.88rem;color:#C0392B;line-height:1.65;padding-left:1.2rem;position:relative;font-weight:500;">
-            <span style="position:absolute;left:0;">⚠</span>
-            Perishable items like fresh fruit, veg and meat cannot be exchanged unless faulty or spoiled.
-          </li>
+          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:var(--green);">•</span>Bring it back within <strong>24–48 hours</strong>, unopened and in original packaging.</li>
+          <li style="font-size:0.88rem;color:#4A4540;line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:var(--green);">•</span>We'll swap it or offer store credit.</li>
+          <li style="font-size:0.88rem;color:#C0392B;line-height:1.65;padding-left:1.2rem;position:relative;font-weight:500;"><span style="position:absolute;left:0;">⚠</span>Perishables cannot be exchanged unless faulty or spoiled.</li>
         </ul>
       </div>
-
-      <!-- Section 7: No receipt -->
       <div style="background:#1A1815;border-radius:12px;padding:2rem;margin-bottom:2rem;border:1px solid rgba(201,168,76,0.3);">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-          <span style="font-size:1.4rem;">🧾</span>
-          <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--gold);">No Receipt, No Refund or Exchange</h3>
-        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;"><span style="font-size:1.4rem;">🧾</span><h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--gold);">No Receipt, No Refund or Exchange</h3></div>
         <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
-          <li style="font-size:0.88rem;color:rgba(255,255,255,0.7);line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--gold);">•</span>
-            We're happy to help with exchanges or store credit for non-perishable items, but <strong style="color:#fff;">we cannot process refunds or exchanges without a valid receipt.</strong>
-          </li>
-          <li style="font-size:0.88rem;color:rgba(255,255,255,0.7);line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--gold);">•</span>
-            For fresh produce and meat, we can only consider exchanges or refunds if items are faulty or spoiled — and proof of purchase helps us process these quickly.
-          </li>
-          <li style="font-size:0.88rem;color:rgba(255,255,255,0.7);line-height:1.65;padding-left:1.2rem;position:relative;">
-            <span style="position:absolute;left:0;color:var(--gold);">•</span>
-            Our returns policy allows you to return items <strong style="color:#fff;">within 14 days of purchase.</strong>
-          </li>
+          <li style="font-size:0.88rem;color:rgba(255,255,255,0.7);line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">•</span>We cannot process refunds or exchanges <strong style="color:#fff;">without a valid receipt.</strong></li>
+          <li style="font-size:0.88rem;color:rgba(255,255,255,0.7);line-height:1.65;padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">•</span>Our returns policy allows returns <strong style="color:#fff;">within 14 days of purchase.</strong></li>
         </ul>
       </div>
-
-      <!-- Contact CTA -->
       <div style="background:var(--green);border-radius:12px;padding:2rem;text-align:center;">
         <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:0.5rem;">Need help? Get in touch.</div>
         <p style="font-size:0.85rem;color:rgba(255,255,255,0.75);margin-bottom:1.2rem;">We're always happy to help — call us or pop in to the store.</p>
-        <a href="tel:01483725215" style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--dark);padding:12px 28px;border-radius:6px;text-decoration:none;font-size:0.9rem;font-weight:700;transition:all 0.2s;">📞 01483 725215</a>
+        <a href="tel:01483725215" style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--dark);padding:12px 28px;border-radius:6px;text-decoration:none;font-size:0.9rem;font-weight:700;">📞 01483 725215</a>
       </div>
-
     </div>
   </div>
-
   <footer>
   <div class="footer-top">
     <div class="footer-top-inner">
@@ -2454,24 +2385,3 @@ function showPage(name) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
-
-<script>
-function showPage(name){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-  var el=document.getElementById('nav-'+name);
-  if(el)el.classList.add('active');
-  closeMobileNav();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function toggleMobileNav(){
-  document.getElementById('mobile-nav').classList.toggle('open');
-}
-function closeMobileNav(){
-  document.getElementById('mobile-nav').classList.remove('open');
-  document.body.style.overflow='';
-}
-</script>
-</body>
-</html>
